@@ -1,4 +1,5 @@
 import 'package:delivery_app/feature/cart/presentation/provider/cart_provider.dart';
+import 'package:delivery_app/feature/cart/presentation/widgets/empty_cart_widget.dart';
 import 'package:delivery_app/feature/product/domain/entity/product_entity.dart';
 import 'package:delivery_app/feature/product/presentation/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
@@ -80,9 +81,7 @@ class _CartPageState extends ConsumerState<CartPage> {
                 ),
               ],
             )
-          : const Center(
-              child: Text("No items"),
-            ),
+          : const EmptyCartWidget(),
     );
   }
 }
