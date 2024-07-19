@@ -6,26 +6,32 @@ import 'package:delivery_app/feature/home/domain/usecases/get_specials_usecase.d
 import 'package:delivery_app/feature/product/data/repository/product_repository_impl.dart';
 import 'package:delivery_app/feature/product/domain/repository/product_repository.dart';
 import 'package:delivery_app/feature/product/domain/usacases/get_products_usecase.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 GetIt sl = GetIt.I;
 
 Future<void> setupLocator() async {
+  // Dotenv
+  await dotenv.load();
+
   // Supabase
-  await sl.registerSingleton(Supabase.initialize(
-    url: 'https://inurqaacvswmfuoryrhq.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImludXJxYWFjdnN3bWZ1b3J5cmhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjA4NjQxODAsImV4cCI6MjAzNjQ0MDE4MH0.SFKYp0-dC3CegfmwRR0bi7aiPhBMj9OUB_qZeS0BSLM',
-  ));
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
   sl.registerSingleton<SupabaseClient>(Supabase.instance.client);
 
   // Network
-  sl.registerSingleton<SupabaseService>(SupabaseService(client: sl<SupabaseClient>()));
+  sl.registerSingleton<SupabaseService>(
+      SupabaseService(client: sl<SupabaseClient>()));
 
   // Repository
-  sl.registerSingleton<HomeRepository>(HomeRepositoryImpl(supabaseService: sl()));
-  sl.registerSingleton<ProductRepository>(ProductRepositoryImpl(supabaseService: sl()));
+  sl.registerSingleton<HomeRepository>(
+      HomeRepositoryImpl(supabaseService: sl()));
+  sl.registerSingleton<ProductRepository>(
+      ProductRepositoryImpl(supabaseService: sl()));
 
   // Usecases
   sl.registerSingleton(GetMenuItemsUsecase(repository: sl()));

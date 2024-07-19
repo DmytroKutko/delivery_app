@@ -36,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text("Menu"),
+                centerTitle: true,
+                actions: const [CartIcon()],
               ),
               body: const LoadingPage(),
             );

@@ -36,6 +36,7 @@ dependencies:
   # Launch icon
   flutter_launcher_icons: ^0.13.1
   flutter_sticky_header: ^0.6.5
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - .env
 
   fonts:
     - family: Muli
