@@ -1,0 +1,67 @@
+name: delivery_app
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0-26.0.dev  # Specify a range for the SDK version to ensure compatibility
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Dependency injection
+  get_it: ^7.7.0
+
+  # Router
+  go_router: ^14.2.1
+
+  # BLoC
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+
+  # Local storage
+  hive: ^2.2.3
+  supabase_flutter: ^2.5.8
+  shared_preferences: ^2.2.3
+
+  # State managment
+  riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
+
+  # Launch icon
+  flutter_launcher_icons: ^0.13.1
+  flutter_sticky_header: ^0.6.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/logo.jpg"
+  min_sdk_android: 21
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Muli
+      fonts:
+        - asset: assets/fonts/Muli.ttf
+        - asset: assets/fonts/Muli-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Muli-Light.ttf
+          weight: 300
