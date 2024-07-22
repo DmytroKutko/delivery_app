@@ -36,7 +36,11 @@ dependencies:
   # Launch icon
   flutter_launcher_icons: ^0.13.1
   flutter_sticky_header: ^0.6.5
+
+  # Dotenv
   flutter_dotenv: ^5.1.0
+
+  # Lottie animation
   lottie: ^3.1.2
 
 dev_dependencies:
@@ -58,6 +62,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/google.png
     - assets/animations/
     - .env
 

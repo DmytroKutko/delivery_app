@@ -5,4 +5,6 @@ abstract class HomeRepository {
   Future<List<MenuEntity>> getMenuItems();
 
   Future<List<ProductEntity>> getSpecials();
+
+  Future<void> signOut();
 }

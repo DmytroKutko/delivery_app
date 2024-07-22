@@ -17,4 +17,9 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<List<ProductEntity>> getSpecials() {
     return supabaseService.getSpecials();
   }
+
+  @override
+  Future<void> signOut() async {
+    return await supabaseService.client.auth.signOut();
+  }
 }
