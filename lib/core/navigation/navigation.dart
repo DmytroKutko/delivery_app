@@ -1,5 +1,7 @@
 import 'package:delivery_app/feature/auth/presentation/pages/login_page.dart';
+import 'package:delivery_app/feature/auth/presentation/pages/register_page.dart';
 import 'package:delivery_app/feature/cart/presentation/pages/cart_page.dart';
+import 'package:delivery_app/feature/home/presentation/pages/edit_profile_page.dart';
 import 'package:delivery_app/feature/home/presentation/pages/home_page.dart';
 import 'package:delivery_app/feature/product/presentation/pages/product_page.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,14 @@ class Navigation {
       GoRoute(
         path: "/login",
         builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: "/register",
+        builder: (context, state) => const RegisterPage(),
+      ),
+      GoRoute(
+        path: "/edit_profile",
+        builder: (context, state) => const EditProfilePage(),
       ),
       GoRoute(
           path: "/product/:type/:title",

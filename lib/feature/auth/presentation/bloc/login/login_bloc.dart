@@ -18,28 +18,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginWithEmailAndPasswordUsecase loginWithEmailAndPasswordUsecase =
       sl();
 
-  LoginBloc() : super(LoginInitial()) {
+  LoginBloc() : super(LoginInitialState()) {
     on<LoginInit>(loginInit);
     on<LoginSignInEvent>(loginSignInEvent);
     on<LoginContinueWithGoogle>(loginContinueWithGoogle);
+    on<LoginSignUpEvent>(loginSignUpEvent);
   }
 
   FutureOr<void> loginInit(LoginInit event, Emitter<LoginState> emit) async {
-    emit(LoginLoading());
+    emit(LoginLoadingState());
 
     final currentSession = getCurrentSession();
 
     if (currentSession != null) {
       emit(LoginRedirectToHomePage());
     } else {
-      emit(LoginSignIn());
+      emit(LoginSignInState());
     }
   }
 
   FutureOr<void> loginSignInEvent(
       LoginSignInEvent event, Emitter<LoginState> emit) async {
     try {
-      emit(LoginLoading());
+      emit(LoginLoadingState());
 
       final result = await loginWithEmailAndPasswordUsecase
           .loginWithEmailAndPassword(event.email, event.password);
@@ -47,15 +48,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (result.session != null) {
         emit(LoginRedirectToHomePage());
       } else {
-        emit(LoginSignIn());
+        emit(LoginSignInState());
         emit(LoginErrorSignIn());
       }
     } catch (e) {
       emit(LoginErrorSignIn());
-      emit(LoginSignIn());
+      emit(LoginSignInState());
     }
   }
 
   FutureOr<void> loginContinueWithGoogle(
       LoginContinueWithGoogle event, Emitter<LoginState> emit) {}
+
+  FutureOr<void> loginSignUpEvent(
+      LoginSignUpEvent event, Emitter<LoginState> emit) {
+    emit(LoginSignUp());
+  }
 }

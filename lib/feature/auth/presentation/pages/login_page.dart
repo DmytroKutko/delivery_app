@@ -46,6 +46,10 @@ class _LoginPageState extends State<LoginPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Center(child: Text("Error SignIn"))));
             }
+          case LoginSignUp _:
+            {
+              context.go("/register");
+            }
           case LoginRedirectToHomePage _:
             {
               context.go("/home");
@@ -56,10 +60,10 @@ class _LoginPageState extends State<LoginPage> {
       },
       builder: (context, state) {
         switch (state) {
-          case LoginLoading _:
+          case LoginLoadingState _:
             return const LoadingPage();
 
-          case LoginSignIn _:
+          case LoginSignInState _:
             return Scaffold(
               body: Padding(
                 padding:
@@ -152,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 20),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        _bloc.add(LoginSignUpEvent());
+                      },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -173,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
 
-          case LoginError _:
+          case LoginErrorState _:
             return const Scaffold();
 
           default:

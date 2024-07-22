@@ -1,4 +1,5 @@
 import 'package:delivery_app/feature/home/data/model/menu_model.dart';
+import 'package:delivery_app/feature/home/data/model/profile_model.dart';
 import 'package:delivery_app/feature/product/data/model/product_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -36,5 +37,14 @@ class SupabaseService {
     return data
         .map((item) => ProductModel.fromJson(item as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<ProfileModel> getProfileData() async {
+    final id = client.auth.currentUser!.id;
+
+    final response =
+        await client.from('profiles').select().eq('id', id).single();
+
+    return ProfileModel.fromJson(response);
   }
 }

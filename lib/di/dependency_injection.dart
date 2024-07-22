@@ -4,8 +4,11 @@ import 'package:delivery_app/feature/auth/domain/usecases/get_current_session_us
 import 'package:delivery_app/feature/auth/domain/usecases/login_with_email_and_password_usecase.dart';
 import 'package:delivery_app/feature/home/data/remote/supabase.dart';
 import 'package:delivery_app/feature/home/data/repository/home_repository_impl.dart';
+import 'package:delivery_app/feature/home/data/repository/profile_repository_impl.dart';
 import 'package:delivery_app/feature/home/domain/repository/home_repository.dart';
+import 'package:delivery_app/feature/home/domain/repository/profile_repository.dart';
 import 'package:delivery_app/feature/home/domain/usecases/get_menu_items_usecase.dart';
+import 'package:delivery_app/feature/home/domain/usecases/get_profile_data_usecase.dart';
 import 'package:delivery_app/feature/home/domain/usecases/get_specials_usecase.dart';
 import 'package:delivery_app/feature/home/domain/usecases/profile_sign_out_usecase.dart';
 import 'package:delivery_app/feature/product/data/repository/product_repository_impl.dart';
@@ -39,6 +42,8 @@ Future<void> setupLocator() async {
       ProductRepositoryImpl(supabaseService: sl()));
   sl.registerSingleton<LoginRepository>(
       LoginRepositoryImpl(supabaseService: sl()));
+  sl.registerSingleton<ProfileRepository>(
+      ProfileRepositoryImpl(supabaseService: sl()));
 
   // Usecases
   sl.registerSingleton(GetMenuItemsUsecase(repository: sl()));
@@ -47,4 +52,5 @@ Future<void> setupLocator() async {
   sl.registerSingleton(LoginWithEmailAndPasswordUsecase(repository: sl()));
   sl.registerSingleton(GetCurrentSessionUsecase(repository: sl()));
   sl.registerSingleton(ProfileSignOutUsecase(repository: sl()));
+  sl.registerSingleton(GetProfileDataUsecase(repository: sl()));
 }

@@ -13,3 +13,5 @@ class LoginSignInEvent extends LoginEvent {
 }
 
 class LoginContinueWithGoogle extends LoginEvent {}
+
+class LoginSignUpEvent extends LoginEvent {}

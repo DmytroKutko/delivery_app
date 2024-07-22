@@ -46,7 +46,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           case ProfileSuccess():
             {
               return Scaffold(
-                appBar: AppBar(),
+                appBar: AppBar(
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          context.push("/edit_profile");
+                        },
+                        icon: const Icon(Icons.edit))
+                  ],
+                ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
