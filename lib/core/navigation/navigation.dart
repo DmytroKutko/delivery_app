@@ -14,8 +14,18 @@ class Navigation {
         MaterialPage(child: Text('Error: ${state.error}')),
     routes: <RouteBase>[
       GoRoute(
-        path: "/home",
-        builder: (context, state) => const HomePage(),
+        path: '/home',
+        builder: (context, state) {
+          return const HomePage(index: 0);
+        },
+      ),
+      GoRoute(
+        path: "/home/:index",
+        builder: (context, state) {
+          final String? indexStr = state.pathParameters['index'];
+          final int index = int.tryParse(indexStr ?? '') ?? 0;
+          return HomePage(index: index);
+        },
       ),
       GoRoute(
         path: "/cart",

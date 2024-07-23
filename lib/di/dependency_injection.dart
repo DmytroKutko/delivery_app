@@ -11,6 +11,7 @@ import 'package:delivery_app/feature/home/domain/usecases/get_menu_items_usecase
 import 'package:delivery_app/feature/home/domain/usecases/get_profile_data_usecase.dart';
 import 'package:delivery_app/feature/home/domain/usecases/get_specials_usecase.dart';
 import 'package:delivery_app/feature/home/domain/usecases/profile_sign_out_usecase.dart';
+import 'package:delivery_app/feature/home/domain/usecases/update_profile_usecase.dart';
 import 'package:delivery_app/feature/product/data/repository/product_repository_impl.dart';
 import 'package:delivery_app/feature/product/domain/repository/product_repository.dart';
 import 'package:delivery_app/feature/product/domain/usacases/get_products_usecase.dart';
@@ -53,4 +54,5 @@ Future<void> setupLocator() async {
   sl.registerSingleton(GetCurrentSessionUsecase(repository: sl()));
   sl.registerSingleton(ProfileSignOutUsecase(repository: sl()));
   sl.registerSingleton(GetProfileDataUsecase(repository: sl()));
+  sl.registerSingleton(UpdateProfileUsecase(repository: sl()));
 }

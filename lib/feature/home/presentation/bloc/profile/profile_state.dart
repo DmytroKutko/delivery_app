@@ -9,7 +9,11 @@ final class ProfileInitial extends ProfileState {}
 
 final class ProfileLoading extends ProfileState {}
 
-final class ProfileSuccess extends ProfileState {}
+final class ProfileSuccess extends ProfileState {
+  final ProfileEntity profile;
+
+  ProfileSuccess({required this.profile});
+}
 
 final class ProfileError extends ProfileState {}
 

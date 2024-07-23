@@ -44,6 +44,12 @@ dependencies:
   lottie: ^3.1.2
   image_picker: ^1.1.2
 
+  # Path
+  path: ^1.9.0
+
+  # UUID
+  uuid: ^4.4.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

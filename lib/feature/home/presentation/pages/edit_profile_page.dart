@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:delivery_app/core/navigation/navigation.dart';
 import 'package:delivery_app/core/ui/loading_page.dart';
+import 'package:delivery_app/feature/home/domain/entity/profile_entity.dart';
 import 'package:delivery_app/feature/home/presentation/bloc/edit_profile/edit_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -33,6 +36,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
+  void removeImage() {
+    setState(() {
+      _image = null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +61,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileBloc, EditProfileState>(
       bloc: _bloc,
-      listener: (context, state) {},
+      listenWhen: (previous, current) => current is EditProfileStateListener,
+      buildWhen: (previous, current) => current is! EditProfileStateListener,
+      listener: (context, state) {
+        switch (state) {
+          case EditProfileStateSuccessfulyUpdatedListener():
+            {
+              removeImage();
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Center(child: Text("Successfuly updated"))));
+            }
+
+          default:
+            break;
+        }
+      },
       builder: (context, state) {
         switch (state) {
           case EditProfileLoading():
@@ -67,8 +90,30 @@ class _EditProfilePageState extends State<EditProfilePage> {
               appBar: AppBar(
                 title: const Text("Edit profile"),
                 centerTitle: true,
+                leading: IconButton(
+                  onPressed: () {
+                    context.go("/home/2");
+                  },
+                  icon: const Icon(Icons.arrow_back_ios),
+                ),
                 actions: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.save))
+                  IconButton(
+                    onPressed: () {
+                      _bloc.add(
+                        EditProfileSaveChanges(
+                          image: _image,
+                          profileEntity: ProfileEntity(
+                            fullName: fullNameController.text,
+                            address: addressController.text,
+                            imageUrl: _image == null
+                                ? state.profileData.imageUrl
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.save),
+                  )
                 ],
               ),
               body: Padding(
@@ -92,15 +137,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           alignment: AlignmentDirectional.bottomEnd,
                           children: [
                             ClipOval(
-                              child: _image == null
-                                  ? Image.asset(
-                                      "assets/images/user_default.jpg")
-                                  : Image.file(
+                              child: _image != null // Set selected image
+                                  ? Image.file(
                                       _image!,
                                       height: 200,
                                       width: 200,
                                       fit: BoxFit.cover,
-                                    ),
+                                    )
+                                  : state.profileData.imageUrl != null
+                                      ? Image.network(
+                                          height: 200,
+                                          width: 200,
+                                          state.profileData.imageUrl!,
+                                          fit: BoxFit.cover,
+                                        ) // Set uploaded image if exist
+                                      : Image.asset(
+                                          "assets/images/user_default.jpg",
+                                        ), // Default image
                             ),
                             Container(
                               decoration: BoxDecoration(

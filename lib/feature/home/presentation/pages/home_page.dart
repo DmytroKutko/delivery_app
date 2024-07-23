@@ -4,7 +4,9 @@ import 'package:delivery_app/feature/home/presentation/pages/profile_screen.dart
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int? index;
+
+  const HomePage({super.key, this.index});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,6 +19,14 @@ class _HomePageState extends State<HomePage> {
     const SpecialScreen(),
     const ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    setState(() {
+      _currentIndex = widget.index ?? 0;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

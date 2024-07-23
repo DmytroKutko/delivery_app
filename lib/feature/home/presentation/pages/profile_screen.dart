@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   actions: [
                     IconButton(
                         onPressed: () {
-                          context.push("/edit_profile");
+                          context.go("/edit_profile");
                         },
                         icon: const Icon(Icons.edit))
                   ],
@@ -59,16 +59,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 15),
-                    Center(
+                    SizedBox(
+                      height: 200,
+                      width: 200,
                       child: ClipOval(
-                        child: Image.network(
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s",
-                        ),
+                        child: state.profile.imageUrl != null
+                            ? Image.network(
+                                height: 200,
+                                width: 200,
+                                state.profile.imageUrl!,
+                                fit: BoxFit.cover,
+                              ) // Set uploaded image if exist
+                            : Image.asset(
+                                "assets/images/user_default.jpg",
+                              ), // Default image,
                       ),
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "User User",
+                      state.profile.fullName ?? "Unknown",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(
@@ -81,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const Icon(Icons.pin_drop),
                         const SizedBox(width: 10),
                         Text(
-                          "Street 123",
+                          state.profile.address ?? "No data",
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ],
