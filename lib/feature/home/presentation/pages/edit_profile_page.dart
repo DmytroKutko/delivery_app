@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:delivery_app/core/navigation/navigation.dart';
 import 'package:delivery_app/core/ui/loading_page.dart';
 import 'package:delivery_app/feature/home/domain/entity/profile_entity.dart';
 import 'package:delivery_app/feature/home/presentation/bloc/edit_profile/edit_profile_bloc.dart';
