@@ -96,12 +96,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                     const Spacer(flex: 1),
-                    MaterialButton(
-                      onPressed: () {
-                        _bloc.add(ProfileSignOutEvent());
-                      },
-                      child: const Text("Sign out"),
-                    )
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _bloc.add(ProfileSignOutEvent());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor:
+                              Colors.white, // Color of the text and icon
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(24.0), // Rounded corners
+                            side: const BorderSide(
+                                color: Colors.black,
+                                width: 1.0), // Border color and width
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12.0), // Button padding
+                        ),
+                        child: const SizedBox(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .center, // Center the row items
+                            children: [
+                              Icon(Icons.logout),
+                              SizedBox(width: 24),
+                              Text("Sign out"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               );

@@ -20,8 +20,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   File? _image;
 
   final TextEditingController fullNameController = TextEditingController();
-  final FocusNode fullNameFocusNode = FocusNode();
   final TextEditingController addressController = TextEditingController();
+  final FocusNode fullNameFocusNode = FocusNode();
   final FocusNode addressFocusNode = FocusNode();
 
   Future<void> _pickImage() async {

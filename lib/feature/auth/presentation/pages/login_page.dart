@@ -39,6 +39,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
       bloc: _bloc,
+      listenWhen: (previous, current) => current is LoginListener,
+      buildWhen: (previous, current) => current is! LoginListener,
       listener: (context, state) {
         switch (state) {
           case LoginErrorSignIn _:
@@ -82,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                         label: Text("Email"),
                       ),
                     ),
+                    const SizedBox(height: 15),
                     TextField(
                       controller: passwordController,
                       onTap: () {
@@ -93,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         label: Text("Password"),
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 60),
                     MaterialButton(
                       color: Colors.teal,
                       textColor: Colors.white,

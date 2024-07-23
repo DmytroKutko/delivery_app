@@ -2,6 +2,7 @@ import 'package:delivery_app/feature/auth/data/repository/login_repository_impl.
 import 'package:delivery_app/feature/auth/domain/repository/login_repository.dart';
 import 'package:delivery_app/feature/auth/domain/usecases/get_current_session_usecase.dart';
 import 'package:delivery_app/feature/auth/domain/usecases/login_with_email_and_password_usecase.dart';
+import 'package:delivery_app/feature/auth/domain/usecases/register_with_email_and_password_usecase.dart';
 import 'package:delivery_app/feature/home/data/remote/supabase.dart';
 import 'package:delivery_app/feature/home/data/repository/home_repository_impl.dart';
 import 'package:delivery_app/feature/home/data/repository/profile_repository_impl.dart';
@@ -55,4 +56,5 @@ Future<void> setupLocator() async {
   sl.registerSingleton(ProfileSignOutUsecase(repository: sl()));
   sl.registerSingleton(GetProfileDataUsecase(repository: sl()));
   sl.registerSingleton(UpdateProfileUsecase(repository: sl()));
+  sl.registerSingleton(RegisterWithEmailAndPasswordUsecase(repository: sl()));
 }
