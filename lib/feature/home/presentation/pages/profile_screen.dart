@@ -124,6 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Icon(Icons.logout),
                               SizedBox(width: 24),
                               Text("Sign out"),
+                              SizedBox(width: 24),
                             ],
                           ),
                         ),
